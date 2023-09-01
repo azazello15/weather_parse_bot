@@ -13,6 +13,12 @@ async def start_command(message: types.Message):
 
 @dp.message_handler()
 async def get_weather(message: types.Message):
+
+    '''
+    для более наглядного ответа я создал словарь для 7 типов погод
+    и каждая из них имело значение в виде юнит-кодов соответствующих эмодзи
+    '''
+    
     code_to_smile = {
         "Clear": "Ясно \U00002600",
         "Clouds": "Облачно \U00002601",
@@ -22,7 +28,10 @@ async def get_weather(message: types.Message):
         "Snow": "Снег \U0001F328",
         "Mist": "Туман \U0001F32B"
     }
-
+    '''
+    на данном этапе производился парсинг данных с сайта https://openweathermap.org/api
+    с помощью библиотеки requests я произвел запросы и выделив ключевые мометны распарсил JSON-ответ и представил данные в боте
+    '''
     try:
         r = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={API_KEY}&units=metric"
